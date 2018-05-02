@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Mr.Meow</string>
+    <string name="api">22f03f4a-45de-48f2-b2ce-ff6614fd6f54</string>
+    <string name="text_chart">Text chart</string>
+    <string name="voice_chart">Voice chart</string>
+    <string name="notebook">Notebook</string>
+    <string name="title_activity_note">Notebook</string>
+    <string-array name="welcome_tips">
+        <item>Hi!</item>
+        <item>Hi,you can chat with me now!</item>
+        <item>You can press the voice chat button and speak to me.</item>
+        <item>You can press the notebook button to record your idea.</item>
+        <item>Hey, there! </item>
+        <item>Do you want to talk in cat language? Meow Meow Meow!</item>
+    </string-array>
+
+</resources>

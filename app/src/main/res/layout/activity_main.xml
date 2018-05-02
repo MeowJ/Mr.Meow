@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.eeyjj3.mrc11.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="434dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        tools:context="TextChat"
+        android:layout_weight="8.37">
+
+        <ListView
+            android:id="@+id/list_of_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/fab"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="16dp"
+            android:background="@color/common_google_signin_btn_text_light_disabled"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"></ListView>
+
+
+        <EditText
+            android:layout_toLeftOf="@+id/fab"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/user_message"
+            android:hint="Enter your message"
+            android:textColorHint="@color/common_google_signin_btn_text_light"
+            android:layout_marginLeft="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:clickable="true"
+            android:src="@drawable/ic_send"
+            android:id="@+id/fab"
+            android:tint="@android:color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </FrameLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/navigation" />
+
+</LinearLayout>

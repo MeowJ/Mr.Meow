@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_voicechat"
+        android:icon="@drawable/ic_action_name"
+        android:title="@string/voice_chart" />
+
+    <item
+        android:id="@+id/navigation_note"
+        android:icon="@drawable/ic_note"
+        android:title="@string/notebook" />
+
+</menu>
