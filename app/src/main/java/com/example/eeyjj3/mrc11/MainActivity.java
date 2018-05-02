@@ -1,5 +1,6 @@
 package com.example.eeyjj3.mrc11;
 
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -19,12 +20,20 @@ import com.example.eeyjj3.mrc11.Adapter.ResultAdapter;
 import com.example.eeyjj3.mrc11.Helper.HttpDataHandler;
 import com.example.eeyjj3.mrc11.Models.ApiModel;
 import com.example.eeyjj3.mrc11.Models.ChatModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import dmax.dialog.SpotsDialog;
+
 
 /**
  * Created by eeyjj3 on 28/04/2018.
@@ -37,10 +46,13 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;//install the chat list
     EditText editText;//let user enter their message
     List<ChatModel> list_chat = new ArrayList<>();//list of chat history
-    FloatingActionButton btn_send_message;
+    FloatingActionButton btn_send_message, btn_save_message;
     private final int REQ_CODE_SPEECH_INPUT = 66;//length of the input message
     private String [] welcome_array;
     private double currentTime, oldTime = 0.0;
+    FirebaseFirestore db;
+    ChatModel chatModel;
+    AlertDialog dialog;// use 'dmax.dialog.SpotsDialog;' to show the animation.
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -72,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.list_of_message);//chat history
         editText = (EditText)findViewById(R.id.user_message);//message entered by user
-        ResultAdapter welcome;
+        dialog = new SpotsDialog(this);
 
         // add a welcome tips
         ChatModel welcomeModel;
@@ -81,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(new ResultAdapter(list_chat,getApplicationContext()));
 
         btn_send_message = (FloatingActionButton)findViewById(R.id.fab);
+        //send the latest chat message and it's time to the note.
+        btn_save_message = (FloatingActionButton)findViewById(R.id.send_note);
 
         btn_send_message.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,12 +111,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_save_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //get text message and create cat model
+                saveData();
+            }
+        });
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     private class DataAPI extends AsyncTask<List<ChatModel>,Void,String> {
-        String stream = null;
         List<ChatModel> models;
         //store the message send by user.
         String text = editText.getText().toString();
@@ -110,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(List<ChatModel>... params) {
+            String stream = null;
             //send the user data to the API endpoint through API key.
             String url = String.format("http://api.simsimi.com/request.p?key=%s&lc=en&ft=1.0&text=%s",getString(R.string.api),text);
             models = params[0];
@@ -123,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             Gson gson = new Gson();
             ApiModel response = gson.fromJson(s,ApiModel.class);
             // get response from API
-            ChatModel chatModel = new ChatModel(response.getResponse(),false,getTime());
+            chatModel = new ChatModel(response.getResponse(),false,getTime());
             models.add(chatModel);
             ResultAdapter adapter = new ResultAdapter(models,getApplicationContext());
             listView.setAdapter(adapter);
@@ -189,6 +211,29 @@ public class MainActivity extends AppCompatActivity {
         if ((currentTime-oldTime)>=5*60*1000){
             return str;
         }else{return "";}
+    }
+
+
+    private void saveData() {
+        //set a random ID to the note
+        dialog.show();//show the dialog animation
+        db = FirebaseFirestore.getInstance();
+        String id = UUID.randomUUID().toString();
+        Map<String,Object> note = new HashMap<>();
+        note.put("id",id);
+        note.put("description","chat time: "+getTime());
+        note.put("title",chatModel.getMessage());
+        db.collection("NoteList").document(id).set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                dialog.dismiss();
+                Toast.makeText(getApplicationContext(),
+                        "message saved",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //db.collection("NoteList").document(id).set("description",description);
     }
 
 

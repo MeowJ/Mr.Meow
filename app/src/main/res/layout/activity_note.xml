@@ -24,7 +24,7 @@
             
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/title"
-                android:text="Title"
+                android:text="Message"
                 android:textSize="30sp"
                 android:inputType="text"
                 android:textColorHint="@android:color/white"

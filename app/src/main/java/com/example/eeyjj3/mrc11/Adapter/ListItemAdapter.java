@@ -6,11 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.eeyjj3.mrc11.Models.Note;
 import com.example.eeyjj3.mrc11.NoteActivity;
 import com.example.eeyjj3.mrc11.R;
-
 import java.util.List;
 
 /**
@@ -67,8 +65,6 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder> {
 
     @Override
     public void onBindViewHolder(ListItemViewHolder holder, int position) {
-
-
         //set item data
         holder.item_title.setText(noteList.get(position).getTitle());
         holder.item_description.setText(noteList.get(position).getDescription());
