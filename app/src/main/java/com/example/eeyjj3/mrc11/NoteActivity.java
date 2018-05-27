@@ -38,7 +38,7 @@ import dmax.dialog.SpotsDialog;
  * Created by eeyjj3 on 29/04/2018.
  * FireBase setting:
  * use package name and the debug signing debug certificate to Add Firebase
- * signing debug certificate in this APP is: SHA1: B2:5B:4D:92:66:26:B1:C8:7E:9C:66:9B:63:20:92:ED:77:93:12:A9
+ * signing debug certificate in this APP is: SHA1: xxxxxx
  * Then download google-services.json, add it in to app/src
  * Then edit build.gradle according to the instruction, the Firebase can be added into the APP
  */
