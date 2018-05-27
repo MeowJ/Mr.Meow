@@ -1,5 +1,8 @@
 # Mr.Meow
 A chatbot which supports voice chat and connected on google firebase
+
+![img](https://github.com/MeowJ/Mr.Meow/blob/master/pictures/1.whole%20_chat_page.jpg)
+
 ##	Manual 
 ###	Open the application
 The application allows the user chat with the bot by text and voice, to open the application and enter the main interface, the user need to simply tap the launcher icon:
