@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Mr.Meow</string>
-    <string name="api">22f03f4a-45de-48f2-b2ce-ff6614fd6f54</string>
+    <string name="api">your API</string>
     <string name="text_chart">Text chart</string>
     <string name="voice_chart">Voice chart</string>
     <string name="notebook">Notebook</string>
